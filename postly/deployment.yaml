@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postly-app
+spec:
+  selector:
+    matchLabels:
+      app: postly-app
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: postly-app
+    spec:
+      containers:
+        - name: postly-app
+          image: youtubedilruba/postly:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 300m
+              memory: 512Mi
+            limits:
+              cpu: 1.5
+              memory: 2Gi
